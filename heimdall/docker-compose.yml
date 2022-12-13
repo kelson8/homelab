@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    volumes:
+      - ./config:/config
+    ports:
+      - 8081:80
+      - 8443:443
+    restart: unless-stopped
+    networks:
+       - proxy
+
+networks:
+  proxy:
+    external: true

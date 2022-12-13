@@ -1,0 +1,17 @@
+.env
+**/config/
+**/data/
+*.bak
+photoprism/
+
+tig-stack/telegraf/
+heimdall/app.sqlite
+youtube-dl/release-versions/
+youtube-dl/root/
+youtube-dl-gui/appdata/
+youtube-dl-gui/audio/
+youtube-dl-gui/subscriptions/
+youtube-dl-gui/users/
+youtube-dl-gui/video/
+
+

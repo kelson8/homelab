@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+#This file isn't currently setup to be used yet.
+    qbittorrentvpn:
+        image: dyonr/qbittorrentvpn
+        container_name: qbittorrentvpn
+        volumes:
+            - '/your/config/path/:/config'
+            - '/your/downloads/path/:/downloads'
+        environment:
+            - PUID=1000
+            - PGID=1000
+            - VPN_ENABLED=yes
+            - VPN_TYPE=wireguard
+            - LAN_NETWORK=192.168.0.0/24
+        ports:
+            - '8040:8080'
+        restart: unless-stopped

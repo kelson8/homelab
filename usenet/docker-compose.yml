@@ -1,0 +1,64 @@
+
+services:
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    networks:
+      - proxy
+    volumes:
+      - ./data/sabnzbd:/config
+#      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
+#      - /mnt/ssd_smb-500gb/usenet/sonarr/incomplete:/incomplete-downloads #optional
+      - /mnt/dz1/downloads/complete:/downloads
+      - /mnt/dz1/downloads/incomplete:/incomplete-downloads
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    networks:
+      - proxy
+    volumes:
+      - ./data/sonarr:/config
+      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
+#      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
+      - /mnt/dz1/downloads/complete:/downloads
+    ports:
+      - 8989:8989
+    depends_on:
+      - sabnzbd
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    networks:
+      - proxy
+    volumes:
+      - ./data/radarr:/config
+      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
+#      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
+      - /mnt/dz1/downloads/complete:/downloads
+    ports:
+      - 7878:7878
+    depends_on:
+      - sabnzbd
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true

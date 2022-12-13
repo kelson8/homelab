@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  cache:
+    image: jgeusebroek/privatebin
+    container_name: privatebin
+    restart: unless-stopped
+    networks:
+      - proxy
+    ports:
+      - 8180:80
+    volumes:
+      - ./data:/privatebin/data
+      - ./config/:/privatebin/cfg
+
+networks:
+  proxy:
+    external: true

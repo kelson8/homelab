@@ -1,0 +1,22 @@
+version: "2.1"
+services:
+  nextcloud:
+    image: lscr.io/linuxserver/nextcloud:latest
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    networks:
+      - proxy
+    volumes:
+      - ./config:/config
+      - /mnt/10tb/docker/nextcloud/data:/data
+      - ./php.ini:/etc/php8/php.ini
+    ports:
+      - 8400:443
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true

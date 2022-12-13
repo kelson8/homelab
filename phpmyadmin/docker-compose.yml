@@ -1,0 +1,23 @@
+version: "2.1"
+services:
+  phpmyadmin:
+    image: lscr.io/linuxserver/phpmyadmin:latest
+    container_name: phpmyadmin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - PMA_ARBITRARY=1 
+#      - PMA_ABSOLUTE_URI=https://phpmyadmin.example.com #optional
+
+    networks:
+      - proxy
+    volumes:
+      - ./config:/config
+    ports:
+      - 8043:80
+    restart: unless-stopped
+
+networks:
+  proxy:
+    external: true
