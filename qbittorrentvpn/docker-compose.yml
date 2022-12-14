@@ -5,8 +5,8 @@ services:
         image: dyonr/qbittorrentvpn
         container_name: qbittorrentvpn
         volumes:
-            - '/your/config/path/:/config'
-            - '/your/downloads/path/:/downloads'
+            - ./config:/config
+            - /mnt/10tb/torrents/:/downloads
         environment:
             - PUID=1000
             - PGID=1000
