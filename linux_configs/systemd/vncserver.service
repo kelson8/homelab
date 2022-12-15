@@ -1,0 +1,39 @@
+[Unit]
+Description=Remote desktop service (VNC)
+After=syslog.target network-online.target
+
+# The display that VNC will use
+DISPLAY="2"
+
+# Color depth (between 8 and 32)
+DEPTH="16"
+
+# The Desktop geometry to use.
+#GEOMETRY="<WIDTH>x<HEIGHT>"
+#GEOMETRY="800x600"
+GEOMETRY="1280x720"
+#GEOMETRY="1280x1024"
+
+# The name that the VNC Desktop will have.
+NAME="vnc-server"
+
+OPTIONS="-name ${NAME} -depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY}"
+
+[Service]
+Type=forking
+User=kelson
+
+# Clean any existing files in /tmp/.X11-unix environment
+# I don't think this is needed, works fine without it.
+#ExecStartPre=/bin/sh -c 'vncserver -kill %i > /dev/null 2>&1 || :'
+
+#Original line that was hard coded
+#ExecStart=vncserver -geometry 1280x720 -depth 16 -localhost :2
+
+#/bin/bash is needed for the env variables to work, it didn't seem to work without it.
+ExecStart=/bin/bash -c "/usr/bin/vncserver ${OPTIONS}"
+ExecStop=/bin/bash -c "/usr/bin/vncserver -kill ${DISPLAY}"
+
+[Install]
+
+WantedBy=multi-user.target
