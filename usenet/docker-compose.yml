@@ -8,7 +8,8 @@ services:
       - PGID=1000
       - TZ=America/New_York
     networks:
-      - proxy
+      #- proxy
+      - media
     volumes:
       - ./data/sabnzbd:/config
 #      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
@@ -27,7 +28,8 @@ services:
       - PGID=1000
       - TZ=America/New_York
     networks:
-      - proxy
+      #- proxy
+      - media
     volumes:
       - ./data/sonarr:/config
       - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
@@ -47,7 +49,8 @@ services:
       - PGID=1000
       - TZ=America/New_York
     networks:
-      - proxy
+      #- proxy
+      - media
     volumes:
       - ./data/radarr:/config
       - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
@@ -59,6 +62,10 @@ services:
       - sabnzbd
     restart: unless-stopped
 
+#networks:
+#  proxy:
+#    external: true
+    
 networks:
-  proxy:
+  media:
     external: true
