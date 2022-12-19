@@ -1,0 +1,19 @@
+.env
+**/config/
+**/data/
+
+*.bak
+photoprism/
+
+#Once i get photoprism running this will exclude the storage folder.
+photoprism/storage
+
+tig-stack/telegraf/
+heimdall/app.sqlite
+youtube-dl/release-versions/
+youtube-dl/root/
+youtube-dl-gui/appdata/
+youtube-dl-gui/audio/
+youtube-dl-gui/users/
+youtube-dl-gui/video/
+

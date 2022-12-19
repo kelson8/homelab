@@ -1,6 +1,8 @@
 .env
 **/config/
 **/data/
+
+
 *.bak
 photoprism/
 
@@ -9,12 +11,12 @@ photoprism/storage
 
 tig-stack/telegraf/
 heimdall/app.sqlite
-youtube-dl/release-versions/
-youtube-dl/root/
-youtube-dl-gui/appdata/
-youtube-dl-gui/audio/
-youtube-dl-gui/subscriptions/
-youtube-dl-gui/users/
-youtube-dl-gui/video/
+/docker/youtube-dl/release-versions/
+/docker/youtube-dl/root/
+/docker/youtube-dl-gui/appdata/
+/docker/youtube-dl-gui/audio/
+/docker/youtube-dl-gui/subscriptions/
+/docker/youtube-dl-gui/users/
+/docker/youtube-dl-gui/video/
 
 
