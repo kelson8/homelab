@@ -32,7 +32,8 @@ services:
       - media
     volumes:
       - ./data/sonarr:/config
-      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
+#      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
+      - /mnt/10tb/usenet/downloads/new/tv_shows:/tv
 #      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
       - /mnt/dz1/downloads/complete:/downloads
     ports:
@@ -53,7 +54,8 @@ services:
       - media
     volumes:
       - ./data/radarr:/config
-      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
+#      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
+      - /mnt/10tb/usenet/downloads/new/movies:/movies
 #      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
       - /mnt/dz1/downloads/complete:/downloads
     ports:
