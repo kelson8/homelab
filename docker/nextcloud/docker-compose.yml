@@ -10,7 +10,8 @@ services:
     networks:
       - proxy
     volumes:
-      - ./config:/config
+      #- ./config:/config
+      - /mnt/10tb/docker/nextcloud/config:/config
       - /mnt/10tb/docker/nextcloud/data:/data
       - ./php.ini:/etc/php8/php.ini
     ports:
