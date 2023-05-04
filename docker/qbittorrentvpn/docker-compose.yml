@@ -2,21 +2,29 @@ version: '3.3'
 services:
 #This file isn't currently setup to be used yet.
   qbittorrentvpn:
+    cap_add:
+      - NET_ADMIN
     image: dyonr/qbittorrentvpn
     container_name: qbittorrentvpn
     volumes:
       - ./config:/config
-      - /mnt/10tb/torrents/:/downloads
+      #- /mnt/10tb/torrents/:/downloads
+      - /mnt/dz1/torrents/:/downloads
     environment:
-      - PUID=1000
-      - PGID=1000
+#      - PUID=1000
+#      - PGID=1000
       - VPN_ENABLED=yes
       - VPN_TYPE=wireguard
-      - LAN_NETWORK=192.168.0.0/24
+      - LAN_NETWORK=192.168.1.0/24,192.168.80.0/24
+      - NAME_SERVERS=10.64.0.1
+#      - WEBUI_PORT_ENV=8050 #optional.
+#      - INCOMING_PORT_ENV=8999 #optional
     networks:
       - media
     ports:
-      - '8040:8080'
+      - '8050:8080'
+      - '62471:8999'
+      - '62471:8999/udp'
     restart: unless-stopped
 
 networks:

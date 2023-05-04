@@ -19,4 +19,4 @@ heimdall/app.sqlite
 /docker/youtube-dl-gui/users/
 /docker/youtube-dl-gui/video/
 
-
+/docker/usenet/docker-compose.yml.bak.1

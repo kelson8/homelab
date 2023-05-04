@@ -34,6 +34,7 @@ services:
       - ./data/sonarr:/config
 #      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
       - /mnt/10tb/usenet/downloads/new/tv_shows:/tv
+      - /mnt/dz1/tv_raid:/tv_raid
 #      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
       - /mnt/dz1/downloads/complete:/downloads
     ports:
@@ -56,12 +57,47 @@ services:
       - ./data/radarr:/config
 #      - /mnt/10tb/usenet/downloads/new:/mnt/10tb/usenet/downloads/new #optional
       - /mnt/10tb/usenet/downloads/new/movies:/movies
+      - /mnt/dz1/movies_raid:/movies_raid
 #      - /mnt/ssd_smb-500gb/usenet/sonarr/complete:/downloads #optional
       - /mnt/dz1/downloads/complete:/downloads
     ports:
       - 7878:7878
     depends_on:
       - sabnzbd
+    restart: unless-stopped
+
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    networks:
+      #- proxy
+      - media
+    volumes:
+      - ./data/overseerr:/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+      - AUTO_UPDATE=true #optional
+      - RUN_OPTS= #optional
+    networks:
+      - media
+    volumes:
+      - ./data/jackett:/config
+      - /path/to/blackhole:/downloads
+    ports:
+      - 9117:9117
     restart: unless-stopped
 
 #networks:

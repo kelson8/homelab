@@ -16,4 +16,7 @@ youtube-dl-gui/appdata/
 youtube-dl-gui/audio/
 youtube-dl-gui/users/
 youtube-dl-gui/video/
-
+transmissionvpn/downloads
+transmissionvpn/transmission-config
+transmissionvpn/transmission.env
+transmissionvpn/wg0.conf
